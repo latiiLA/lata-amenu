@@ -1,21 +1,24 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Cinzel, Cormorant_Garamond } from "next/font/google";
+import Providers from "@/components/providers";
 import "./globals.css";
-import { ThemeProvider } from "../components/theme-provider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const cinzel = Cinzel({
+  variable: "--font-cinzel",
   subsets: ["latin"],
+  weight: ["500", "600", "700"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "Lata Amenu",
-  description: "Portfolio website designed to showcase software development experience.",
+  title: "The Seat — Lata Amenu",
+  description:
+    "The Seat: a chronicle starring Lata Amenu, The Seatkeeper — full-stack engineer raising systems in Go, React, and Next.js. Join the season.",
 };
 
 export default function RootLayout({
@@ -26,17 +29,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${cinzel.variable} ${cormorant.variable} h-full`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">
-        <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
+      <body className="font-body flex min-h-full flex-col bg-[var(--stone)] text-[var(--parchment)]">
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
